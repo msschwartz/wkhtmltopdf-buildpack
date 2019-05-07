@@ -6,7 +6,10 @@ binary with your environment.
 ## Versions
 
 * Buildpack:   `0.2`
-* wkhtmltopdf: `0.12.3` by default
+* wkhtmltopdf: `0.12.5` by default
+
+*NOTE:* This fork of the buildpack only supports `0.12.5` and higher.  It inatalls
+the deb package for Heroku-18 stack
 
 ## Usage
 
@@ -15,14 +18,14 @@ and `wkhtmltoimage` binaries, and the corresponding library `libwkhtmltox`,
 into the dynos:
 
 ```bash
-$ heroku buildpacks:add https://github.com/dscout/wkhtmltopdf-buildpack.git
+$ heroku buildpacks:add https://github.com/srbartlett/wkhtmltopdf-buildpack.git
 ```
 
 If you want to use a `wkhtmltopdf` version other than 0.12.3, set
 `WKHTMLTOPDF_VERSION`:
 
 ```bash
-heroku config:set WKHTMLTOPDF_VERSION="0.12.4"
+heroku config:set WKHTMLTOPDF_VERSION="0.12/0.12.5/wkhtmltox_0.12.5-1.bionic_amd64.deb"
 ```
 
 ### Clearing Repo Cache
@@ -38,7 +41,7 @@ $ heroku repo:purge_cache -a appname
 ## Troubleshooting
 
 If you run into issues when trying to deploy with this buildpack, make sure your
-app is running on `cedar-14` or `heroku-16`. You can check this with:
+app is running on `cedar-18`
 
 ```bash
 $ heroku stack
