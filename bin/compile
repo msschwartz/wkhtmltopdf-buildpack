@@ -45,3 +45,8 @@ mv $WKHTMLTOPDF_LIBS/* $LIB_PATH/
 
 echo "-----> Cleaning up"
 rm -rf $WKHTMLTOPDF_PATH
+
+echo "-----> Installing fonts"
+mkdir -p $1/.fonts
+cp $1/Montserrat-Regular.ttf $1/.fonts/
+fc-cache -f $1/.fonts
