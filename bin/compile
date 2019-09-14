@@ -19,8 +19,6 @@ WKHTMLTOPDF_PATH="$TMP_PATH/usr/local"
 WKHTMLTOPDF_BINARIES="$WKHTMLTOPDF_PATH/bin"
 WKHTMLTOPDF_LIBS="$WKHTMLTOPDF_PATH/lib"
 
-BIN_DIR=$(cd $(dirname $0); pwd)
-
 if [ -f $WKHTMLTOPDF_DEB ]; then
   echo "-----> Using wkhtmltopdf deb from cache"
 else
@@ -48,5 +46,5 @@ rm -rf $WKHTMLTOPDF_PATH
 
 echo "-----> Installing fonts"
 mkdir -p $1/.fonts
-cp $1/Montserrat-Regular.ttf $1/.fonts/
+cp $(pwd)/Montserrat-Regular.ttf $1/.fonts/
 fc-cache -f $1/.fonts
