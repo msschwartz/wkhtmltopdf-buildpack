@@ -12,13 +12,7 @@ LIB_PATH="$BUILD_DIR/vendor/wkhtmltox/lib"
 TMP_PATH="$BUILD_DIR/tmp"
 mkdir -p $CACHE_DIR $BIN_PATH $LIB_PATH $TMP_PATH
 
-if [[ -f "$ENV_DIR/WKHTMLTOPDF_VERSION" ]]; then
-  WKHTMLTOPDF_VERSION=$(cat "$ENV_DIR/WKHTMLTOPDF_VERSION")
-else
-  WKHTMLTOPDF_VERSION="0.12/0.12.5/wkhtmltox_0.12.5-1.bionic_amd64.deb"
-fi
-
-WKHTMLTOPDF_URL="https://downloads.wkhtmltopdf.org/$WKHTMLTOPDF_VERSION"
+WKHTMLTOPDF_URL="https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.bionic_amd64.deb"
 WKHTMLTOPDF_DEB="$CACHE_DIR/wkhtmltox.deb"
 WKHTMLTOPDF_PATH="$TMP_PATH/usr/local"
 
@@ -26,7 +20,6 @@ WKHTMLTOPDF_BINARIES="$WKHTMLTOPDF_PATH/bin"
 WKHTMLTOPDF_LIBS="$WKHTMLTOPDF_PATH/lib"
 
 BIN_DIR=$(cd $(dirname $0); pwd)
-FONTS_DIR=$(cd "$BIN_DIR/../fonts"; pwd)
 
 if [ -f $WKHTMLTOPDF_DEB ]; then
   echo "-----> Using wkhtmltopdf deb from cache"
@@ -52,9 +45,3 @@ mv $WKHTMLTOPDF_LIBS/* $LIB_PATH/
 
 echo "-----> Cleaning up"
 rm -rf $WKHTMLTOPDF_PATH
-
-echo "-----> Installing fonts"
-mkdir -p $1/.fonts
-ls $FONTS_DIR
-cp $FONTS_DIR/* $1/.fonts/
-fc-cache -f $1/.fonts
